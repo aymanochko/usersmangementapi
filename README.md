@@ -32,3 +32,8 @@ Bonuses:
 
 ### Technical Architecture
 ![Technical Architecture](docs/archi/UsersManagementApi_TehchicalArchitecture.png)
+
+### Run with docker
+in order to run the project using docker-compose, execute the following commands 
+*$ ./mvnw clean package*
+*$ docker-compose up*
