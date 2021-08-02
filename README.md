@@ -35,5 +35,5 @@ Bonuses:
 
 ### Run with docker
 in order to run the project using docker-compose, execute the following commands 
-- ** $ ./mvnw clean package **
-- ** $ docker-compose up **
+- $ ./mvnw clean package
+- $ docker-compose up
