@@ -1,0 +1,42 @@
+version: "3.3"
+services:
+  mongo:
+    image: mongo:4.4
+    container_name: mongo
+    hostname: mongo
+    restart: unless-stopped
+    ports:
+      - 27017:27017
+    volumes:
+      - /data/db/
+      - /var/log/mongodb/
+      - /docker-entrypoint-initdb.d/
+    networks:
+      - main-network
+    command: ["--bind_ip", "0.0.0.0"]
+    
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: usermanagementapi
+    container_name: usermanagementapi
+    restart: on-failure
+    depends_on:
+      - mongo
+    ports:
+      - 8887:8887
+    environment:
+      - SERVER_PORT=8887
+      - SPRING_PROFILES_ACTIVE=prod
+      - SPRING_APPLICATION_NAME=User Management API
+      - SPRING_DATA_MONGODB_AUTO_INDEX_CREATION=true
+      - SPRING_DATA_MONGODB_HOST=mongo
+      - SPRING_DATA_MONGODB_PORT=27017
+    networks:
+      - main-network
+
+networks:
+  main-network:
+    external:
+      name: my-network   
