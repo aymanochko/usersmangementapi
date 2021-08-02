@@ -35,5 +35,29 @@ Bonuses:
 
 ### Run with docker
 in order to run the project using docker-compose, execute the following commands 
-- $ ./mvnw clean package
-- $ docker-compose up
+ - $ ./mvnw clean package
+ - $ docker network create my-network
+ - $ docker-compose up
+ - $ curl -X 'POST' \
+  'http://localhost:8887/rest/api/users' \
+  -H 'accept: */*' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "username": "john1",
+  "firstName": "John",
+  "lastName": "Cleese",
+  "email": "john.cleese@example.com",
+  "phoneNumber": "0613125565",
+  "password": "MyP@ssword",
+  "birthDate": "02042001",
+  "country": "FR"
+}'
+ - $ curl -X 'GET' \
+  'http://localhost:8887/rest/api/users/61081b1ee4093e44e5488523' \
+  -H 'accept: application/json'
+ - $ curl -X 'GET' \
+  'http://localhost:8887/rest/api/users/?username=john1' \         
+  -H 'accept: application/json'
+  
+### API Documentation
+[Documentation Link](https://app.swaggerhub.com/apis-docs/aymanochko/usersmanagement/1.0.0)
