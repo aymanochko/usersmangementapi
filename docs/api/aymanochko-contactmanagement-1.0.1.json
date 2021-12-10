@@ -1,0 +1,183 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Contact management API",
+    "description": "Contact management API",
+    "contact": {
+      "email": "aymen.elheni.ext@ag2rlamondiale.fr"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "1.0.1"
+  },
+  "servers": [
+    {
+      "url": "https://virtserver.swaggerhub.com/aymanochko/contactmanagement/1.0.1",
+      "description": "SwaggerHub API Auto Mocking"
+    },
+    {
+      "url": "https://localhost:8080/WSContactManagement/rest/api/1.0.0",
+      "description": "Contact management API"
+    }
+  ],
+  "tags": [
+    {
+      "name": "espaceclientgroupe",
+      "description": "Formulaire de contact pour l'espace entreprise"
+    }
+  ],
+  "paths": {
+    "/contacts": {
+      "post": {
+        "tags": [
+          "espaceclientgroupe"
+        ],
+        "summary": "Créer un contact client",
+        "description": "Créer un contact client",
+        "operationId": "creerContact",
+        "requestBody": {
+          "description": "Contact à créer",
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Contact"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Enregistrement d'une demande de contact",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "invalid input, object invalid",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Contact": {
+        "required": [
+          "message",
+          "motif",
+          "numero-siren",
+          "objet",
+          "utilisateur-civilite",
+          "utilisateur-email",
+          "utilisateur-nom",
+          "utilisateur-prenom"
+        ],
+        "type": "object",
+        "properties": {
+          "numero-siren": {
+            "type": "string",
+            "description": "Numéro Siren de l'entreprise",
+            "example": "999999999"
+          },
+          "motif": {
+            "type": "string",
+            "description": "Le motif de la demande de contact",
+            "example": "RETRAITE COMPLEMENTAIRE>Mouvement de personnel"
+          },
+          "objet": {
+            "type": "string",
+            "description": "L'objet de la demande de contact",
+            "example": "Signaler plus de personnel"
+          },
+          "message": {
+            "type": "string",
+            "description": "Le message saisi par l'utilisateur",
+            "example": "Ceci est un message"
+          },
+          "utilisateur-civilite": {
+            "type": "string",
+            "description": "Civilite de l'utilisateur Mr ou Mme",
+            "example": "M ou MME"
+          },
+          "utilisateur-nom": {
+            "type": "string",
+            "description": "Nom de l'utilisateur",
+            "example": "DUPONT"
+          },
+          "utilisateur-prenom": {
+            "type": "string",
+            "description": "Prénom de l'utilisateur",
+            "example": "Jacques"
+          },
+          "utilisateur-telephone": {
+            "type": "string",
+            "description": "Numéro de téléphone de l'utilisateur",
+            "example": "103060041"
+          },
+          "utilisateur-email": {
+            "type": "string",
+            "description": "Adresse email de l'utilisateur",
+            "format": "email",
+            "example": "jacques.dupont@dupont.fr"
+          },
+          "utilisateur-fonction": {
+            "type": "string",
+            "description": "Fonction de l'utilisateur dans l'entreprise",
+            "example": "GESTIONNAIRE PAIE"
+          },
+          "utilisateur-login": {
+            "type": "string",
+            "description": "Login de l'utilisateur",
+            "example": "jdupont"
+          },
+          "donnees-form-siret": {
+            "maxLength": 14,
+            "minLength": 14,
+            "type": "string",
+            "description": "Le numéro de siret",
+            "example": "40483304800022"
+          },
+          "donnees-form-telephone": {
+            "maxLength": 10,
+            "minLength": 10,
+            "type": "string",
+            "description": "Le numéro de téléphone",
+            "example": "0248330480"
+          },
+          "donnees-form-email": {
+            "type": "string",
+            "description": "Adresse email",
+            "format": "email",
+            "example": "jacques.dupont@dupont.fr"
+          },
+          "donnees-form-numero-contrat": {
+            "type": "string",
+            "description": "Le numéro de contrat",
+            "example": "00108280698"
+          },
+          "piecesjointes": {
+            "type": "array",
+            "description": "Une liste de pièces jointes ajoutées. Maximum 3 PJ et taille maximale d'une pièce 5 Mo",
+            "items": {
+              "type": "string",
+              "format": "binary"
+            }
+          }
+        }
+      }
+    }
+  }
+}
